@@ -1,0 +1,109 @@
+Instalações/configuração:
+ + -------------------------------------------------------------------------------------------------------------------- +
+
+ npm i -D typescript                              - instalação typescript
+ npx tsc --init                                   - instalação typescript configuração
+                                                    alterar para "target": "ES2020", tsconfig.json
+ npm i -D @types/node
+ npm i tsx -D                                     - converte typescript para javascript < npx tsx src/server.ts >
+
+ dica: 
+  - pachage.json
+  "scripts": {
+    "dev":  "tsx watch src/server.ts"
+  },
+
+  - tsconfig
+   "target": "es2020",   
+   "module": "commonjs",    
+
++ -------------------------------------------------------------------------------------------------------------------- +
+ 
++ -------------------------------------------------------------------------------------------------------------------- +
+ 
+Fastify:
+ npm i fastify                                    - instalação fastify ORM
+
++ -------------------------------------------------------------------------------------------------------------------- +
+ 
+EsLint                                            - padronização da digitação dos códigos
+ npm i eslint @rocketseat/eslint-config -D 
+
+ dica:
+ - criar na raiz o arquivo: 
+  .eslintrc.json
+    {
+        "extends":[
+            "@rocketseat/eslint-config/node"
+        ]
+    }
+
+ - instalar no vscode:
+   eslint 
+   
++ -------------------------------------------------------------------------------------------------------------------- +
+  npm i knex sqlite3                             - orm javascript falicita sqlite
+  inserir na linha o comando useNullAsDefault    
+
+  import { knex as setupKnex } from "knex"
+
+  export const knex = setupKnex({
+      client:"sqlite",
+      connection:{
+          filename:"./temp/app.db"
+      },
+      useNullAsDefault:true
+  })
+
+
++ -------------------------------------------------------------------------------------------------------------------- +
+  Migration
+
+  configuração por usar typescript:
+
+  npx knex migration:make migration-document             - criar migration
+
+  - criar arquivo conf knex : knexfile.ts para que o
+    knex reconheça o ts. pois ele so reconhece js.
+  - exportamos o arquivo databases para o knexfile:
+     import { config } from './src/databases'
+     export default config
+
+
+  - configuração do package.json
+    "scripts": {
+    "knex": "node --import tsx ./node_modules/knex/bin/cli.js",
+    "dev": "tsx watch src/server.ts"
+  },
+
+  - para criar o migration:
+    npm run knex -- migrate:make create-documents
+
+
+
++ -------------------------------------------------------------------------------------------------------------------- +
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
